@@ -1,0 +1,8 @@
+1.run composer install command
+2.create database in db
+3.run php artisan migrate:install (creates migration table in mysql database)
+4.php artisan make:migration create_employees_table (For first time)
+5.php artisan migrate (create Employees table in database)
+6.php artisan make:controller Employees (creates Controller)
+7.php artisan make:model Employee (creates Model)
+8.php artisan serve (starts server)
