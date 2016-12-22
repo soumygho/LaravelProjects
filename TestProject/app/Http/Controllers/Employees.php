@@ -28,15 +28,23 @@ class Employees extends Controller
      * @return Response
      */
     public function store(Request $request) {
-        $employee = new Employee;
+		$employee = Employee::find($request->input('email'));
+		if(is_null($employee))
+		{
+			$employee = new Employee;
 
-        $employee->name = $request->input('name');
-        $employee->email = $request->input('email');
-        $employee->contact_number = $request->input('contact_number');
-        $employee->position = $request->input('position');
-        $employee->save();
+			$employee->name = $request->input('name');
+			$employee->email = $request->input('email');
+			$employee->contact_number = $request->input('contact_number');
+			$employee->position = $request->input('position');
+			$employee->save();
 
-        return 'Employee record successfully created with id ' . $employee->id;
+			return 'Employee record successfully created with id ' . $employee->id;
+		}
+		else
+		{
+			return 'Employee record exists with email ' . $employee->email;
+		}
     }
 
     /**
@@ -74,11 +82,17 @@ class Employees extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy(Request $request) {
-        $employee = Employee::find($request->input('id'));
-
-        $employee->delete();
-
-        return "Employee record successfully deleted #" . $request->input('id');
+    public function destroy(Request $request,$id) {
+        $employee = Employee::find($id);//$request->input('id')
+		if(!is_null($employee))
+		{
+			$employee->delete();
+			return "Employee record successfully deleted #" . $id;
+		}
+		else
+		{
+			return "Could not find Employee record with id  #" . $id;
+		}
+        
     }
 }

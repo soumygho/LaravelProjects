@@ -1,8 +1,8 @@
 app.controller('employeesController', function($scope, $http, API_URL) {
     //retrieve employees listing from API
     $http.get(API_URL + "employees").then(function(response) {
-                $scope.employees = response;
-                console.log("response from "+API_URL+"employees ## "+response);
+                $scope.employees = response.data;
+                console.log("response from "+API_URL+"employees ## "+JSON.stringify(response));
             });
     
     //show modal form
@@ -18,8 +18,8 @@ app.controller('employeesController', function($scope, $http, API_URL) {
                 $scope.id = id;
                 $http.get(API_URL + 'employees/' + id)
                         .then(function(response) {
-                            console.log(response);
-                            $scope.employee = response;
+                            console.log(response.data);
+                            $scope.employee = response.data;
                         });
                 break;
             default:
@@ -54,6 +54,7 @@ app.controller('employeesController', function($scope, $http, API_URL) {
 
     //delete record
     $scope.confirmDelete = function(id) {
+		console.log("trying to delete with id ##"+id);
         var isConfirmDelete = confirm('Are you sure you want this record?');
         if (isConfirmDelete) {
             $http({
