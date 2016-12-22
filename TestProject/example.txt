@@ -1,0 +1,1 @@
+http://www.tutorials.kode-blog.com/laravel-5-angularjs-tutorial
