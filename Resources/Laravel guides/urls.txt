@@ -1,0 +1,4 @@
+https://medium.com/@_garethtdavies/simple-web-push-notifications-with-sendpulse-and-laravel-b13dd9ef13ec#.wtqgc6p3c
+https://ericlbarnes.com/2014/12/23/8-laravel-packages-for-your-next-project/
+https://packagist.org/search/?tags=laravel
+https://packagist.org/packages/dingo/api
