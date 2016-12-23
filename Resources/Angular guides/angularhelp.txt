@@ -1,0 +1,1 @@
+http://tutorials.jenkov.com/angularjs/dependency-injection.html#dependencies-between-modules
