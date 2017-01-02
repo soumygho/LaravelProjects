@@ -34,6 +34,7 @@
 
 <body>
 <?php
+session_start();
 $fb = new Facebook\Facebook([
 "app_id"=>'245328009230954',
 "app_secret"=>'cbeb77937378777f866ae29fd2cc010e',
@@ -42,7 +43,14 @@ $fb = new Facebook\Facebook([
 
 $helper = $fb->getRedirectLoginHelper();
 $permissions = ['email', 'user_likes']; // optional
-$loginUrl = $helper->getLoginUrl('http://tutrangaanchalsikshaniketan.in/', $permissions);
+$loginUrl = $helper->getLoginUrl('http://localhost:8000/fblogin', $permissions);
+if(isset($_SESSION["fb_access_token"]))
+{
+	header('Location: http://localhost:8000/profile');
+	exit;
+}
+
+
 ?>
     <div class="container">
         <div class="row">
