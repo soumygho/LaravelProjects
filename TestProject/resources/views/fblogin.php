@@ -10,9 +10,12 @@ $fb = new Facebook\Facebook([
 ]);
 $helper = $fb->getRedirectLoginHelper();
 $accessToken = $helper->getAccessToken();
+//$accessToken = (string)$_SESSION["fb_access_token"];
+echo $accessToken;
 if(isset($accessToken))
 {
-$_SESSION["fb_access_token"] = (string)$accessToken;
+//$fb->destroySession();
+//session_destroy();
 header('Location: http://localhost:8000/profile');
 exit;
 }

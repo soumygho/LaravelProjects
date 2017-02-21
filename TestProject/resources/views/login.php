@@ -46,7 +46,7 @@ $permissions = ['email', 'user_likes']; // optional
 $loginUrl = $helper->getLoginUrl('http://localhost:8000/fblogin', $permissions);
 if(isset($_SESSION["fb_access_token"]))
 {
-	header('Location: http://localhost:8000/profile');
+	header('Location: http://localhost:8000/');
 	exit;
 }
 

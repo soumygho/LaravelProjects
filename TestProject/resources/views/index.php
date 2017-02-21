@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+
+session_start();
+if(!isset($_SESSION["fb_access_token"]))
+{
+	header('Location: http://localhost:8000/login');
+	exit;
+	
+}
+?>
 <html lang="en-US" ng-app="employeeRecords">
     <head>
         <title>Laravel 5 AngularJS CRUD Example</title>
@@ -36,6 +46,11 @@
                     </tr>
                 </tbody>
             </table>
+			<div>
+			<?php
+			 echo '<a href="/fblogin">Logout</a>';
+			?>
+			<div>
             <!-- End of Table-to-load-the-data Part -->
             <!-- Modal (Pop up when detail button clicked) -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
