@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Search\Searchable;
 class ProductMaster extends Model
 {
+	
 		protected $table = 'productmaster';
+		public $primaryKey = 'prod_id';
      protected $fillable = array('prod_id', 'prod_name','spec','img_url','category_id','org_id','delivery','warranty','rating','subcategory_id');
 	 public function flipkartProduct()
 	{

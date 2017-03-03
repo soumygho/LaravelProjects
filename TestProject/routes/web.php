@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Response as HttpResponse;
+use App\Products\ProductsRepository;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +30,19 @@ Route::post('/api/v1/employees', 'Employees@store');
 Route::post('/api/v1/employees/{id}', 'Employees@update');
 Route::delete('/api/v1/employees/{id}', 'Employees@destroy');
 Route::get('/api/v1/categories/{id?}', 'Categories@index');
-Route::get('/api/v1/products/{search?}', 'Products@index');
+Route::get('/api/v1/products/{search?}', function (ProductsRepository $repository) {
+	if(request('search')!=null)
+	{
+		$articles = $repository->search(request('search'));
+
+		return $articles;
+	}
+	else
+	{
+		$repository->all();
+	}
+});
+Route::get('/api/v1/product/{productId}', 'Products@showProductById');
 Route::get('/api/v1/users', 'UserController@showAll');
 Route::get('/api/v1/user/{id}', 'UserController@index');
 Route::post('/signup', /*function () {
@@ -58,3 +71,21 @@ Route::post('/signin', /*function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/search/{query}',function($query)
+{
+	$client =  Elasticsearch\ClientBuilder::create()->build();
+	$result = $client->search([
+	"index"=>"acme",
+	"body"=>[
+		"query"=>[
+			"match"=>[
+			 "_all"=>$query
+			]
+		]
+	
+	]
+	
+	]);
+	var_dump($result['hits']['hits'][0]['_source']);
+});
